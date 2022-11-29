@@ -23,11 +23,9 @@ public class PracticaPSP0 {
     public static void main(String[] args) throws FileNotFoundException, IOException {
         String fileName = "C:\\Users\\antonio diego\\OneDrive - UNIVERSIDAD DE HUELVA\\Documentos\\UNI\\CMEPPS\\palabras.txt";
         Scanner scan = new Scanner(new File(fileName));
-        Scanner leer = new Scanner(System.in);
-        String desordenada1 = "", desordenada2 = "", palabra, intento;
+
+        String desordenada1 = "", desordenada2 = "", palabra;
         int random = 0;
-        int numIntentos;
-        Boolean acertado = false;
         while (scan.hasNextLine()) {
             desordenada1 = scan.nextLine();
             palabra = desordenada1;
@@ -37,31 +35,40 @@ public class PracticaPSP0 {
                 desordenada1 = desordenada1.substring(0, random - 1) + desordenada1.substring(random, i);
             }
             System.out.println("Palabra desordenada: " + desordenada2 + desordenada1);
-                numIntentos = 1;
-                while (!acertado) {
-                    System.out.println("Jugador 1, Intento " + numIntentos);
-                    intento = leer.nextLine();
-                    if (intento.equals(palabra)) {
-                        System.out.println("Verdadero");
-                        acertado = true;
-                        break;
-                    }else
-                        System.out.println("Falso");
-                    System.out.println("Jugador 2, Intento " + numIntentos);
-                    intento = leer.nextLine();
-                    if (intento.equals(palabra)) {
-                        System.out.println("Verdadero");
-                        acertado = true;
-                        break;
-                    }else
-                        System.out.println("Falso");
-                    
-                    numIntentos++;
-                }
-                acertado = false;
-                desordenada2="";
+            juego(palabra);
+            desordenada2 = "";
         }
 
     }
 
+    public static void juego(String palabra) {
+        Scanner leer = new Scanner(System.in);
+        String intento;
+        int numIntentos;
+        Boolean acertado = false;
+        numIntentos = 1;
+        while (!acertado) {
+            System.out.println("Jugador 1, Intento " + numIntentos);
+            intento = leer.nextLine();
+            if (intento.equals(palabra)) {
+                System.out.println("Verdadero");
+                acertado = true;
+                break;
+            } else {
+                System.out.println("Falso");
+            }
+            System.out.println("Jugador 2, Intento " + numIntentos);
+            intento = leer.nextLine();
+            if (intento.equals(palabra)) {
+                System.out.println("Verdadero");
+                acertado = true;
+                break;
+            } else {
+                System.out.println("Falso");
+            }
+
+            numIntentos++;
+        }
+        acertado = false;
+    }
 }
